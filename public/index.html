@@ -25,12 +25,33 @@
                 <strong>Data Insight</strong>
                 <button onclick="refreshReport()">Refresh</button>
             </div>
-            <div class="report-container">
-                <iframe src="https://lookerstudio.google.com/embed/reporting/733d76b4-b6e6-43e6-9b8f-61b89abe24d8/page/NEInF"></iframe>
-            </div>
+
+            <!-- ///// -->
+<main class="main-container">
+    <div class="card">
+        <div class="card-header">
+            <strong>Data Insight</strong>
+            <button onclick="refreshReport()">Refresh</button>
         </div>
-    </main>
+
+        <div class="report-container">
+            
+            <div id="loading-overlay" class="loading-skeleton">
+                <div class="spinner"></div>
+            </div>
+
+            <iframe id="looker-iframe" src="https://lookerstudio.google.com/embed/reporting/733d76b4-b6e6-43e6-9b8f-61b89abe24d8/page/NEInF"allowfullscreen></iframe>
+        </div>
+
+    </div>
+</main>
+
+
 
     <script src="assets/js/dashboard.js"></script>
 </body>
 </html>
+
+
+
+

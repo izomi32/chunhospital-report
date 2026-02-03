@@ -8,12 +8,33 @@ document.addEventListener('DOMContentLoaded', () => {
             day: 'numeric'
         });
     }
+// ฟังก์ชันสำหรับซ่อน Loader
+    const hideLoader = () => {
+        if (loader) {
+            // เพิ่ม class 'hidden' เพื่อสั่งให้ CSS ทำการ fade out
+            loader.classList.add('hidden');
+            
+            // (Optional) ลบ element ทิ้งไปเลยหลังจาก fade out เสร็จ (0.5s)
+            setTimeout(() => {
+                loader.style.display = 'none';
+            }, 500);
+        }
+    };
 
-    // ฟังก์ชันรีเฟรช Iframe
+    // ดักจับ Event เมื่อ iframe โหลดเสร็จ
+    if (iframe) {
+        iframe.onload = hideLoader;
+    }
+
+    // อัปเดตฟังก์ชันรีเฟรช: ให้แสดง Loader กลับมาก่อนรีเฟรช
     window.refreshReport = () => {
-        const iframe = document.querySelector('iframe');
-        if (iframe) {
-            iframe.src = iframe.src; 
+        if (iframe && loader) {
+            loader.classList.remove('hidden');
+            loader.style.display = 'flex';
+            // ใช้ setTimeout เล็กน้อยเพื่อให้ Browser ทันวาดตัว Loader ก่อนจะสั่งรีเฟรชจริง
+            setTimeout(() => {
+                 iframe.src = iframe.src;
+            }, 100);
         }
     };
 });
